@@ -1,0 +1,29 @@
+module top_module(
+    input clk,
+    input areset,    
+    input in,
+    output out);
+
+    parameter A = 0, B = 1;  
+    reg pres_state, next_state;
+
+   
+    always @(posedge clk or posedge areset) begin   // Asynchronous reset and state updation logic
+        if (areset)
+            pres_state <= B;
+        else
+            pres_state <= next_state;
+    end
+
+   
+    always @(*) begin
+        case (state)                           // Next state logic
+            A: next_state = (in) ? A : B;
+            B: next_state = (in) ? B : A;
+        endcase
+    end
+ 
+    assign out = (pres_state==B); // Output logic (Moore output depends only on current state)
+    
+
+endmodule
