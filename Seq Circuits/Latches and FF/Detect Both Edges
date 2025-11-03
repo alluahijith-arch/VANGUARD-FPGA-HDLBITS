@@ -1,0 +1,12 @@
+module top_module (
+    input clk,
+    input [7:0] in,
+    output [7:0] anyedge
+);
+    reg [7:0] past_in; // Store past value
+
+    always @(posedge clk) begin
+        anyedge <= past_in ^ in;  // Detects both rising or falling edges, bit xor operation used
+        past_in <= in;            // Update stored past input
+    end
+endmodule
