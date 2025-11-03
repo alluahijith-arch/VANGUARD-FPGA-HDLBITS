@@ -1,0 +1,12 @@
+module top_module (
+    input clk,
+    input [7:0] in,
+    output [7:0] pedge
+);
+    reg [7:0] past_in; // can be used to store the past input
+
+    always @(posedge clk) begin
+        pedge <= (~past_in) & in;  // Detect 0→1 transition
+        past_in <= in;             // Updates past value
+    end
+endmodule
