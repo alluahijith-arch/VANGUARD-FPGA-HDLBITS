@@ -5,14 +5,14 @@ module top_module(
     output out);
 
     parameter A = 0, B = 1;  
-    reg pres_state, next_state;
+    reg state, next_state;
 
    
     always @(posedge clk or posedge areset) begin   // Asynchronous reset and state updation logic
         if (areset)
-            pres_state <= B;
+            state <= B;
         else
-            pres_state <= next_state;
+            state <= next_state;
     end
 
    
@@ -23,7 +23,7 @@ module top_module(
         endcase
     end
  
-    assign out = (pres_state==B); // Output logic (Moore output depends only on current state)
+    assign out = (state==B); // Output logic (Moore output depends only on current state)
     
 
 endmodule
