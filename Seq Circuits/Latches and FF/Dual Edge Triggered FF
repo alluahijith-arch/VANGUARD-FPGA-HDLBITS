@@ -1,0 +1,16 @@
+module top_module (
+    input clk,
+    input d,
+    output q
+);
+reg q_pos, q_neg; // stores outputs
+
+    // Capture on positive edge
+    always @(posedge clk)
+        q_pos <= d;        // for positive edge
+
+    always @(negedge clk)  // Capture on negative edge
+        q_neg <= d;
+    
+    assign q = clk ? q_pos : q_neg; //assigns output based on clk
+endmodule
